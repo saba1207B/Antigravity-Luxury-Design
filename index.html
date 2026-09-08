@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity — Luxury Beyond Weight</title>
+  <meta name="description" content="Antigravity redefines luxury through acoustic levitation, obsidian materiality, and architectural precision. Where gravity yields to intention.">
+  <meta name="theme-color" content="#080908">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Antigravity — Luxury Beyond Weight">
+  <meta property="og:description" content="Redefining luxury through acoustic levitation and obsidian materiality.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./assets/images/hero_levitation_core.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/reactive-cursor.css">
+</head>
+<body>
+  <!-- ═══════════════════════════════════════════════════════
+       NAVIGATION — Shrinking Glassmorphism Pill
+       ═══════════════════════════════════════════════════════ -->
+  <header>
+    <nav class="nav-pill" id="nav-pill" aria-label="Main navigation">
+      <a href="#" class="nav-logo" aria-label="Antigravity Home">
+        <!-- Logo Icon: Geometric abstract mark -->
+        <svg class="nav-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M18 6L18 30" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+          <path d="M6 18L30 18" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+          <circle cx="18" cy="18" r="6" fill="currentColor" opacity="0.15"/>
+          <circle cx="18" cy="18" r="3" fill="currentColor"/>
+        </svg>
+        <span>Antigravity</span>
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#craft" class="nav-link">Craft</a>
+        <a href="#technology" class="nav-link">Technology</a>
+        <a href="#philosophy" class="nav-link">Philosophy</a>
+        <a href="#" class="nav-link">Journal</a>
+      </div>
+
+      <button class="nav-action" id="nav-commission-btn" aria-label="Begin Commission">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M9 3V15M3 9H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+      <a href="#craft" class="nav-link">Craft</a>
+      <a href="#technology" class="nav-link">Technology</a>
+      <a href="#philosophy" class="nav-link">Philosophy</a>
+      <a href="#" class="nav-link">Journal</a>
+      <button class="btn btn-primary" id="drawer-commission-btn">Begin Commission</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══════════════════════════════════════════════════════
+         HERO — Composition (92svh)
+         ═══════════════════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+      <div class="hero__text">
+        <div class="hero__eyebrow">
+          <span class="gold-dot"></span>
+          Acoustic Levitation Technology
+        </div>
+
+        <h1 class="hero__title">
+          Beyond<br><em>Weight</em>
+        </h1>
+
+        <p class="hero__subtitle">
+          Where gravity yields to intention. A new paradigm of luxury, 
+          suspended between materiality and the intangible.
+        </p>
+
+        <div class="hero__ctas">
+          <button class="btn btn-primary" id="hero-commission-btn">
+            Begin Commission
+            <svg class="btn-icon" viewBox="0 0 20 20" fill="none">
+              <path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <a href="#craft" class="btn btn-secondary">Explore the Craft</a>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__ambient"></div>
+        <img src="./assets/images/hero_levitation_core.jpg" 
+             alt="Sculptural obsidian and titanium kinetic core, levitating weightlessly" 
+             class="hero__product"
+             width="600"
+             height="800"
+             loading="eager">
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         BRAND STATEMENT
+         ═══════════════════════════════════════════════════════ -->
+    <section class="brand-statement container reveal" aria-label="Brand statement">
+      <p class="brand-statement__text">
+        We engineer <strong>silence</strong> into substance, 
+        crafting objects that exist in a state of 
+        perpetual <strong>suspension</strong> — 
+        where the invisible becomes the architecture 
+        of desire.
+      </p>
+      <div class="brand-statement__rule"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         BENTO GRID — Asymmetrical
+         ═══════════════════════════════════════════════════════ -->
+    <section class="bento-section container" id="craft">
+      <div class="bento-section__header reveal">
+        <div>
+          <span class="section-label">The Craft</span>
+          <h2 class="bento-section__title">Obsessive<br>Precision</h2>
+        </div>
+        <a href="#" class="btn btn-ghost">
+          View Collection
+          <svg class="btn-icon" viewBox="0 0 20 20" fill="none">
+            <path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Card 1: Image-led feature (8×4) -->
+        <div class="bento-grid__item--1 bento-card bento-card--image reveal">
+          <img src="./assets/images/bento_editorial_human.jpg" 
+               alt="Elegant hand interacting with a floating dark sculptural form"
+               width="800" height="600" loading="lazy">
+          <div class="bento-card__overlay">
+            <span class="section-label" style="color: rgba(255,255,255,0.5);">Featured</span>
+            <h3 class="bento-card__title">Weightless Interaction</h3>
+            <p class="bento-card__description" style="color: rgba(255,255,255,0.65);">
+              The moment where touch meets the intangible — our signature levitation core responds to presence alone.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2: Acoustic Resonance Tuner (4×4) -->
+        <div class="bento-grid__item--2 bento-card bento-card--dark reveal" style="transition-delay: 60ms;">
+          <span class="section-label">Acoustic Core</span>
+          <h3 class="bento-card__title">Resonance Tuner</h3>
+          <p class="bento-card__description">
+            Fine-tune the acoustic frequency to achieve perfect levitation equilibrium.
+          </p>
+          <div class="frequency-tuner">
+            <div>
+              <span class="frequency-display" id="freq-value">40.000</span>
+              <span class="frequency-unit">kHz</span>
+            </div>
+            <input type="range" class="frequency-slider" id="freq-slider" 
+                   min="38" max="42" step="0.001" value="40"
+                   aria-label="Frequency tuner">
+          </div>
+          <div class="telemetry" style="margin-top: var(--space-xl);">
+            <div class="telemetry-row">
+              <span class="telemetry-label">Stability</span>
+              <span class="telemetry-value" id="telemetry-stability">99.7%</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="telemetry-label">Phase Lock</span>
+              <span class="telemetry-value" id="telemetry-phase">Engaged</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Waveform Harmonic (4×3) -->
+        <div class="bento-grid__item--3 bento-card bento-card--light reveal" style="transition-delay: 90ms;">
+          <span class="section-label">Harmonic Analysis</span>
+          <h3 class="bento-card__title">Waveform</h3>
+          <p class="bento-card__description">
+            Real-time harmonic telemetry from the acoustic array.
+          </p>
+          <div class="waveform" id="waveform" aria-hidden="true">
+            <!-- Bars generated by JS -->
+          </div>
+          <div class="telemetry" style="margin-top: var(--space-md);">
+            <div class="telemetry-row">
+              <span class="telemetry-label">THD</span>
+              <span class="telemetry-value" style="color: var(--color-ink);">0.003%</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="telemetry-label">SNR</span>
+              <span class="telemetry-value" style="color: var(--color-ink);">142 dB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Material Switcher (5×3) -->
+        <div class="bento-grid__item--4 bento-card bento-card--light reveal" style="transition-delay: 120ms;">
+          <span class="section-label">Materiality</span>
+          <h3 class="bento-card__title">Tactile Finish</h3>
+          <p class="bento-card__description">
+            Each surface is hand-finished to a molecular precision. Select your configuration.
+          </p>
+          <div class="material-switcher" id="material-switcher">
+            <button class="material-swatch material-swatch--obsidian is-active" 
+                    data-material="obsidian" aria-label="Obsidian finish" title="Obsidian"></button>
+            <button class="material-swatch material-swatch--titanium" 
+                    data-material="titanium" aria-label="Brushed Titanium finish" title="Brushed Titanium"></button>
+            <button class="material-swatch material-swatch--gold" 
+                    data-material="gold" aria-label="Champagne Gold finish" title="Champagne Gold"></button>
+          </div>
+          <p class="material-label" id="material-label">Obsidian Ceramic</p>
+          <div style="margin-top: var(--space-lg); border-radius: var(--radius-lg); overflow: hidden; height: 140px;">
+            <img src="./assets/images/bento_material_detail.jpg" 
+                 alt="Close-up of obsidian ceramic with gold inlay" 
+                 id="material-image"
+                 style="width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease-out), filter 300ms var(--ease-out);"
+                 loading="lazy">
+          </div>
+        </div>
+
+        <!-- Card 5: Sensor Readout (3×3) -->
+        <div class="bento-grid__item--5 bento-card bento-card--light reveal" style="transition-delay: 150ms;">
+          <span class="section-label">Environment</span>
+          <h3 class="bento-card__title">Calibration</h3>
+          <div class="sensor-grid">
+            <div class="sensor-item">
+              <div class="sensor-value" id="sensor-temp">21.4°</div>
+              <div class="sensor-unit">Temperature</div>
+            </div>
+            <div class="sensor-item">
+              <div class="sensor-value" id="sensor-humidity">42%</div>
+              <div class="sensor-unit">Humidity</div>
+            </div>
+            <div class="sensor-item">
+              <div class="sensor-value" id="sensor-pressure">1013</div>
+              <div class="sensor-unit">hPa</div>
+            </div>
+            <div class="sensor-item">
+              <div class="sensor-value" id="sensor-vibration">0.02</div>
+              <div class="sensor-unit">g RMS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         FEATURE BLOCK — Full Width Dark
+         ═══════════════════════════════════════════════════════ -->
+    <section class="feature-block" id="technology">
+      <div class="feature-block__radiance"></div>
+      <div class="feature-block__inner">
+        <div class="feature-block__canvas-wrapper reveal">
+          <canvas id="acoustic-field-canvas" width="560" height="400" 
+                  aria-label="Interactive acoustic levitation field visualization"></canvas>
+        </div>
+
+        <div class="feature-block__content reveal" style="transition-delay: 90ms;">
+          <span class="feature-block__label">Core Technology</span>
+          <h2 class="feature-block__title">Acoustic<br>Levitation Field</h2>
+          <p class="feature-block__description">
+            256 precisely calibrated piezoelectric transducers generate a standing wave at 40 kHz, 
+            creating stable nodes of zero net force — where matter defies gravity with mathematical certainty.
+          </p>
+
+          <div class="feature-block__specs">
+            <div class="spec-row">
+              <span class="spec-label">Transducers</span>
+              <span class="spec-value">256 Array</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Operating Frequency</span>
+              <span class="spec-value">40 kHz</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Levitation Force</span>
+              <span class="spec-value">4.2 mN</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Stability</span>
+              <span class="spec-value">±0.01 mm</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Power Consumption</span>
+              <span class="spec-value">12W Idle</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         PHILOSOPHY
+         ═══════════════════════════════════════════════════════ -->
+    <section class="philosophy container" id="philosophy">
+      <div class="philosophy__header reveal">
+        <span class="section-label" style="justify-content: center;">Our Philosophy</span>
+        <h2 class="philosophy__title">Principles of<br>Weightlessness</h2>
+        <p class="philosophy__subtitle">
+          Three convictions guide every decision, every material choice, 
+          every invisible engineering breakthrough.
+        </p>
+      </div>
+
+      <div class="philosophy__principles">
+        <div class="principle reveal">
+          <span class="principle-number">01</span>
+          <div class="principle-content">
+            <h3 class="principle-title">Silence is Structure</h3>
+            <p class="principle-text">
+              The absence of noise — visual, acoustic, mechanical — is not emptiness but 
+              the most demanding form of engineering. We design the silence between interactions 
+              with the same precision as the interactions themselves.
+            </p>
+          </div>
+        </div>
+
+        <div class="principle reveal" style="transition-delay: 60ms;">
+          <span class="principle-number">02</span>
+          <div class="principle-content">
+            <h3 class="principle-title">Material Integrity</h3>
+            <p class="principle-text">
+              Every surface tells the truth of its making. We reject cosmetic concealment 
+              in favour of honest material expression — where obsidian reveals its volcanic origin 
+              and titanium speaks of aerospace heritage.
+            </p>
+          </div>
+        </div>
+
+        <div class="principle reveal" style="transition-delay: 120ms;">
+          <span class="principle-number">03</span>
+          <div class="principle-content">
+            <h3 class="principle-title">Invisible Engineering</h3>
+            <p class="principle-text">
+              The most sophisticated technology disappears into experience. Our acoustic array 
+              operates below the threshold of human perception — 40 kHz of silent force that 
+              makes the extraordinary feel inevitable.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         FINAL CTA
+         ═══════════════════════════════════════════════════════ -->
+    <section class="cta-section container reveal">
+      <h2 class="cta-section__title">
+        Defy<br><em>Gravity</em>
+      </h2>
+      <p class="cta-section__subtitle">
+        Commission a bespoke Antigravity piece — tailored to your space, 
+        your aesthetic, your understanding of what luxury should feel like.
+      </p>
+      <button class="btn btn-gold" id="cta-commission-btn">
+        Begin Your Commission
+        <svg class="btn-icon" viewBox="0 0 20 20" fill="none">
+          <path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </section>
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="footer__brand-name">
+          <span class="gold-dot" style="margin-right: 8px;"></span>
+          Antigravity
+        </div>
+        <p class="footer__brand-tagline">
+          Luxury beyond weight. Where gravity yields to intention and silence becomes 
+          the architecture of desire.
+        </p>
+        <div class="newsletter-group">
+          <input type="email" class="newsletter-input" placeholder="Enter your email" aria-label="Email for newsletter">
+          <button class="newsletter-btn">Dispatch</button>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="footer__col-title">Explore</h3>
+        <a href="#craft" class="footer__link">The Craft</a>
+        <a href="#technology" class="footer__link">Technology</a>
+        <a href="#philosophy" class="footer__link">Philosophy</a>
+        <a href="#" class="footer__link">Journal</a>
+        <a href="#" class="footer__link">Atelier</a>
+      </div>
+
+      <div>
+        <h3 class="footer__col-title">Commission</h3>
+        <a href="#" class="footer__link">Bespoke Inquiry</a>
+        <a href="#" class="footer__link">Material Library</a>
+        <a href="#" class="footer__link">Configuration</a>
+        <a href="#" class="footer__link">Private Viewing</a>
+      </div>
+
+      <div>
+        <h3 class="footer__col-title">Connect</h3>
+        <a href="#" class="footer__link">Press</a>
+        <a href="#" class="footer__link">Partnerships</a>
+        <a href="#" class="footer__link">Careers</a>
+        <a href="#" class="footer__link">Contact</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span class="footer__copyright">© 2026 Antigravity. All rights reserved.</span>
+      <div class="footer__meta">
+        <span class="footer__meta-item">47.3769° N, 8.5417° E</span>
+        <span class="footer__meta-item">CET / UTC+1</span>
+        <span class="footer__meta-item">v1.0.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════
+       COMMISSION DRAWER
+       ═══════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-overlay" aria-hidden="true"></div>
+  <aside class="commission-drawer" id="commission-drawer" role="dialog" aria-label="Commission inquiry" aria-hidden="true">
+    <button class="drawer-close" id="drawer-close" aria-label="Close commission drawer">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <span class="section-label">Bespoke Commission</span>
+    <h2 class="drawer-title" style="margin-top: var(--space-md);">Begin Your<br>Commission</h2>
+    <p class="drawer-subtitle">
+      Share your vision. Our atelier will respond within 48 hours 
+      with a personalised consultation.
+    </p>
+
+    <form id="commission-form" onsubmit="return false;">
+      <div class="form-group">
+        <label class="form-label" for="commission-name">Full Name</label>
+        <input class="form-input" type="text" id="commission-name" placeholder="Your name" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="commission-email">Email</label>
+        <input class="form-input" type="email" id="commission-email" placeholder="your@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="commission-material">Preferred Material</label>
+        <select class="form-input" id="commission-material">
+          <option value="">Select a finish</option>
+          <option value="obsidian">Obsidian Ceramic</option>
+          <option value="titanium">Brushed Titanium</option>
+          <option value="gold">Champagne Gold</option>
+          <option value="bespoke">Bespoke Configuration</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="commission-message">Your Vision</label>
+        <textarea class="form-textarea" id="commission-message" placeholder="Describe your space, aesthetic preferences, and how you envision Antigravity enhancing your environment."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%;">
+        Submit Inquiry
+        <svg class="btn-icon" viewBox="0 0 20 20" fill="none">
+          <path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </form>
+  </aside>
+
+  <!-- Scripts -->
+  <script src="./js/motion.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/acoustic-field.js"></script>
+  <script src="./js/bento-interactions.js"></script>
+  <script src="./js/reactive-cursor.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
