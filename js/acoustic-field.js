@@ -1,188 +1,201 @@
-/* ANTIGRAVITY — PERFORMANCE-OPTIMIZED ACOUSTIC FIELD */
+/* ═══════════════════════════════════════════════════════════════
+   ANTIGRAVITY — ACOUSTIC LEVITATION FIELD CANVAS
+   ═══════════════════════════════════════════════════════════════ */
+
 (function () {
   'use strict';
 
   const canvas = document.getElementById('acoustic-field-canvas');
   if (!canvas) return;
 
-  const ctx = canvas.getContext('2d', { alpha: true });
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const mobileQuery = window.matchMedia('(max-width: 767px)');
+  const ctx = canvas.getContext('2d');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const GOLD = 'rgba(212,175,55,0.10)';
-  const GOLD_DOT = 'rgba(212,175,55,0.38)';
-  const SURFACE = 'rgba(250,249,246,0.75)';
-  const NODE_COUNT = 4;
+  // ─── Configuration ───
+  const PARTICLE_COUNT = 80;
+  const NODE_COUNT = 5;
+  const GOLD = { r: 212, g: 175, b: 55 };
+  const SURFACE = { r: 250, g: 249, b: 246 };
 
   let particles = [];
-  let width = 0;
-  let height = 0;
-  let dpr = 1;
-  let frame = 0;
-  let running = false;
-  let visible = false;
-  let lastFrame = 0;
   let mouseX = 0.5;
   let mouseY = 0.5;
+  let animationId;
+  let canvasRect;
+  let dpr = 1;
 
-  function isMobile() {
-    return mobileQuery.matches;
-  }
-
-  function targetFPS() {
-    return isMobile() ? 30 : 45;
-  }
-
+  // ─── Resize ───
   function resize() {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    width = Math.max(1, rect.width);
-    height = Math.max(1, rect.height);
-    // Cap backing-store resolution. High-DPI phones otherwise multiply canvas work.
-    dpr = isMobile() ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
-    canvas.width = Math.round(width * dpr);
-    canvas.height = Math.round(height * dpr);
-    canvas.style.width = width + 'px';
-    canvas.style.height = height + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    createParticles();
+    dpr = window.devicePixelRatio || 1;
+    canvasRect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = canvasRect.width * dpr;
+    canvas.height = canvasRect.height * dpr;
+    canvas.style.width = canvasRect.width + 'px';
+    canvas.style.height = canvasRect.height + 'px';
+    ctx.scale(dpr, dpr);
   }
 
-  function createParticles() {
-    const count = reducedMotion.matches ? 16 : (isMobile() ? 24 : 55);
-    particles = Array.from({ length: count }, (_, i) => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      baseX: Math.random() * width,
-      baseY: Math.random() * height,
-      radius: Math.random() * 1.8 + 0.6,
-      alpha: Math.random() * 0.35 + 0.18,
+  // ─── Particle ───
+  function createParticle() {
+    const w = canvasRect.width;
+    const h = canvasRect.height;
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      baseX: Math.random() * w,
+      baseY: Math.random() * h,
+      radius: Math.random() * 2.5 + 0.5,
+      alpha: Math.random() * 0.5 + 0.2,
       phase: Math.random() * Math.PI * 2,
-      speed: Math.random() * 0.002 + 0.0008,
-      node: i % NODE_COUNT
-    }));
+      speed: Math.random() * 0.003 + 0.001,
+      nodeIndex: Math.floor(Math.random() * NODE_COUNT),
+    };
   }
 
-  function nodeY(index, time) {
-    const spacing = height / (NODE_COUNT + 1);
-    return spacing * (index + 1) + Math.sin(time * 0.0005 + index * 0.8) * (isMobile() ? 5 : 8);
-  }
-
-  function draw(timestamp) {
-    if (!running || document.hidden) return;
-
-    const interval = 1000 / targetFPS();
-    if (timestamp - lastFrame < interval) {
-      frame = requestAnimationFrame(draw);
-      return;
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(createParticle());
     }
-    lastFrame = timestamp;
+  }
 
-    ctx.clearRect(0, 0, width, height);
-    const time = timestamp;
+  // ─── Standing wave nodes ───
+  function getNodeY(index, time) {
+    const h = canvasRect.height;
+    const spacing = h / (NODE_COUNT + 1);
+    const baseY = spacing * (index + 1);
+    return baseY + Math.sin(time * 0.5 + index * 0.8) * 8;
+  }
 
-    // Lightweight wave lines. Fewer samples on mobile.
-    const step = isMobile() ? 8 : 5;
+  // ─── Animation Loop ───
+  function draw(time) {
+    const w = canvasRect.width;
+    const h = canvasRect.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Draw standing wave lines
     for (let i = 0; i < NODE_COUNT; i++) {
-      const y0 = nodeY(i, time);
+      const nodeY = getNodeY(i, time * 0.001);
       ctx.beginPath();
-      ctx.strokeStyle = GOLD;
+      ctx.strokeStyle = `rgba(${GOLD.r}, ${GOLD.g}, ${GOLD.b}, 0.06)`;
       ctx.lineWidth = 1;
-      for (let x = 0; x <= width; x += step) {
-        const wave = Math.sin((x / width) * Math.PI * 4 + time * 0.001 + i) * (isMobile() ? 2 : 3);
-        const mouse = isMobile() ? 0 : Math.exp(-((x / width - mouseX) ** 2) * 18) * 6 * (mouseY - 0.5);
-        const y = y0 + wave + mouse;
-        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+
+      for (let x = 0; x < w; x += 2) {
+        const wave = Math.sin((x / w) * Math.PI * 4 + time * 0.001 + i) * 3;
+        const mouseInfluence = Math.exp(-Math.pow((x / w - mouseX) * 3, 2)) * 8 * (mouseY - 0.5);
+        const y = nodeY + wave + mouseInfluence;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
       }
       ctx.stroke();
     }
 
-    for (const p of particles) {
-      p.phase += p.speed * (isMobile() ? 0.8 : 1);
-      const targetY = nodeY(p.node, time);
-      const driftX = Math.sin(p.phase) * (isMobile() ? 10 : 18);
-      const driftY = Math.cos(p.phase * 0.7) * 5;
+    // Draw particles
+    particles.forEach(p => {
+      p.phase += p.speed;
 
-      let rx = 0, ry = 0;
-      if (!isMobile()) {
-        const dx = mouseX * width - p.baseX;
-        const dy = mouseY * height - p.baseY;
-        const distSq = dx * dx + dy * dy;
-        if (distSq < 22500 && distSq > 1) {
-          const dist = Math.sqrt(distSq);
-          const force = (1 - dist / 150) * 22;
-          rx = (-dx / dist) * force;
-          ry = (-dy / dist) * force;
-        }
-      }
+      const targetNodeY = getNodeY(p.nodeIndex, time * 0.001);
+      const driftX = Math.sin(p.phase) * 20;
+      const driftY = Math.cos(p.phase * 0.7) * 6;
 
-      p.x += (p.baseX + driftX + rx - p.x) * 0.045;
-      p.y += (targetY + driftY + ry - p.y) * 0.045;
+      // Mouse repulsion
+      const dx = (mouseX * w) - p.baseX;
+      const dy = (mouseY * h) - p.baseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const repulse = Math.max(0, 1 - dist / 150) * 30;
+      const repulseX = dist > 0 ? (-dx / dist) * repulse : 0;
+      const repulseY = dist > 0 ? (-dy / dist) * repulse : 0;
+
+      const targetX = p.baseX + driftX + repulseX;
+      const targetY = targetNodeY + driftY + repulseY;
+
+      p.x += (targetX - p.x) * 0.04;
+      p.y += (targetY - p.y) * 0.04;
+
+      // Draw
+      const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 3);
+      gradient.addColorStop(0, `rgba(${GOLD.r}, ${GOLD.g}, ${GOLD.b}, ${p.alpha * 0.8})`);
+      gradient.addColorStop(0.5, `rgba(${GOLD.r}, ${GOLD.g}, ${GOLD.b}, ${p.alpha * 0.3})`);
+      gradient.addColorStop(1, `rgba(${GOLD.r}, ${GOLD.g}, ${GOLD.b}, 0)`);
 
       ctx.beginPath();
-      ctx.fillStyle = GOLD_DOT;
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2);
       ctx.fill();
-      ctx.beginPath();
-      ctx.fillStyle = SURFACE;
-      ctx.arc(p.x, p.y, p.radius * 0.45, 0, Math.PI * 2);
-      ctx.fill();
-    }
 
-    // Connecting lines are desktop-only and limited to a small neighborhood.
-    if (!isMobile()) {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i], b = particles[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const distSq = dx * dx + dy * dy;
-          if (distSq < 3600) {
-            const alpha = (1 - Math.sqrt(distSq) / 60) * 0.06;
-            ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
+      // Core dot
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${SURFACE.r}, ${SURFACE.g}, ${SURFACE.b}, ${p.alpha})`;
+      ctx.arc(p.x, p.y, p.radius * 0.6, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Draw connecting lines between nearby particles
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i];
+        const b = particles[j];
+        const dist = Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+        if (dist < 80) {
+          const alpha = (1 - dist / 80) * 0.08;
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(${GOLD.r}, ${GOLD.g}, ${GOLD.b}, ${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
         }
       }
     }
 
-    frame = requestAnimationFrame(draw);
+    animationId = requestAnimationFrame(draw);
   }
 
-  function start() {
-    if (running || reducedMotion.matches || !visible) return;
-    running = true;
-    lastFrame = 0;
-    frame = requestAnimationFrame(draw);
-  }
+  // ─── Mouse tracking ───
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = (e.clientX - rect.left) / rect.width;
+    mouseY = (e.clientY - rect.top) / rect.height;
+  });
 
-  function stop() {
-    running = false;
-    cancelAnimationFrame(frame);
-  }
+  canvas.addEventListener('mouseleave', () => {
+    mouseX = 0.5;
+    mouseY = 0.5;
+  });
 
+  // ─── Init ───
   function init() {
+    if (prefersReducedMotion) {
+      // Static render
+      resize();
+      initParticles();
+      draw(0);
+      cancelAnimationFrame(animationId);
+      return;
+    }
+
     resize();
+    initParticles();
 
-    if (reducedMotion.matches) return;
-
-    const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      if (visible) start(); else stop();
-    }, { threshold: 0.05, rootMargin: '100px' });
+    // Only animate when visible
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          animationId = requestAnimationFrame(draw);
+        } else {
+          cancelAnimationFrame(animationId);
+        }
+      },
+      { threshold: 0.1 }
+    );
     observer.observe(canvas);
-
-    canvas.addEventListener('pointermove', (e) => {
-      if (isMobile()) return;
-      const rect = canvas.getBoundingClientRect();
-      mouseX = (e.clientX - rect.left) / rect.width;
-      mouseY = (e.clientY - rect.top) / rect.height;
-    }, { passive: true });
-
-    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start(), { passive: true });
-    window.addEventListener('resize', resize, { passive: true });
   }
+
+  window.addEventListener('resize', () => {
+    resize();
+    initParticles();
+  });
 
   window.AntigravityAcoustic = { init };
 })();
