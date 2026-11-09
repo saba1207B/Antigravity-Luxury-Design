@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://antigravity.luxury/sitemap.xml
